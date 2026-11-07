@@ -2,6 +2,8 @@
 
 A clean, keyboard-friendly calculator built with plain HTML, CSS and vanilla JavaScript. No frameworks, no build step.
 
+**Live demo:** https://akshaytripathiai.github.io/SimpleCalcultor/
+
 Built as an early practice project while learning JavaScript, and later reworked into a full calculator.
 
 ## Features
