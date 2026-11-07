@@ -1,0 +1,258 @@
+:root {
+  --bg: #e9eef3;
+  --panel: #ffffff;
+  --text: #1c1c1e;
+  --muted: #6b7280;
+  --display: #1c1c1e;
+  --display-text: #ffffff;
+  --key: #f1f3f5;
+  --key-hover: #e2e6ea;
+  --fn: #d4d8dd;
+  --fn-hover: #c4c9cf;
+  --op: #ff9f0a;
+  --op-hover: #ffb340;
+  --op-text: #ffffff;
+  --error: #ff6b6b;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --panel: #1a1d23;
+    --text: #f2f2f7;
+    --muted: #9ca3af;
+    --display: #000000;
+    --key: #333740;
+    --key-hover: #424752;
+    --fn: #5a5f6a;
+    --fn-hover: #6b717d;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.app {
+  width: min(100% - 32px, 360px);
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin: 0 0 20px;
+}
+
+.calculator {
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.display {
+  background: var(--display);
+  color: var(--display-text);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  text-align: right;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.expression {
+  min-height: 1.4em;
+  font-size: 1rem;
+  color: #a1a1aa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.value.is-error {
+  color: var(--error);
+  font-size: 1.5rem !important;
+  font-weight: 400;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: var(--key);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.08s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:active,
+.key.is-pressed {
+  transform: scale(0.94);
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--op);
+  outline-offset: 2px;
+}
+
+.key-fn {
+  background: var(--fn);
+  font-size: 1.25rem;
+}
+
+.key-fn:hover {
+  background: var(--fn-hover);
+}
+
+.key-op,
+.key-equals {
+  background: var(--op);
+  color: var(--op-text);
+  font-size: 1.75rem;
+}
+
+.key-op:hover,
+.key-equals:hover {
+  background: var(--op-hover);
+}
+
+.key-op.is-active {
+  background: var(--op-text);
+  color: var(--op);
+}
+
+.history {
+  margin-top: 24px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.history h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.link-button:hover {
+  color: var(--text);
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.history-item:hover {
+  background: var(--key-hover);
+}
+
+.history-expression {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-result {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.history-empty {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.hint {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.8;
+}
+
+kbd {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.75rem;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--muted);
+}
+
+@media (max-width: 360px) {
+  .key {
+    font-size: 1.25rem;
+  }
+}
