@@ -1,26 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple, keyboard-friendly calculator built with vanilla JavaScript." />
     <title>Simple Calculator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23ff9f0a'/%3E%3Cpath d='M7 9.5h10M7 14.5h10' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1 id="heading">Simple Calculator</h1>
-    <div class="container">
-      <div class="calculator">
-        <input type="text" id="num1" placeholder="Enter a number">
-        <select id="operator">
-          <option value="add">+</option>
-          <option value="subtract">-</option>
-          <option value="multiply">*</option>
-          <option value="divide">/</option>
-        </select>
-        <input type="text" id="num2" placeholder="Enter another number">
-        <button  class="btn btn-success" onclick="calculate()">Calculate</button>
-        <div id="result-text"></div>
-      </div>
-    </div>
+    <main class="app">
+      <h1 class="title">Simple Calculator</h1>
+
+      <section class="calculator" aria-label="Calculator">
+        <div class="display">
+          <div id="expression" class="expression" aria-live="polite"></div>
+          <output id="value" class="value" aria-live="polite">0</output>
+        </div>
+
+        <div class="keys">
+          <button type="button" class="key key-fn" data-action="clear" id="clear-key" title="Clear (Esc)">AC</button>
+          <button type="button" class="key key-fn" data-action="backspace" title="Backspace" aria-label="Backspace">&#9003;</button>
+          <button type="button" class="key key-fn" data-action="percent" title="Percent (%)">%</button>
+          <button type="button" class="key key-op" data-operator="/" title="Divide (/)" aria-label="Divide">&divide;</button>
+
+          <button type="button" class="key" data-digit="7">7</button>
+          <button type="button" class="key" data-digit="8">8</button>
+          <button type="button" class="key" data-digit="9">9</button>
+          <button type="button" class="key key-op" data-operator="*" title="Multiply (*)" aria-label="Multiply">&times;</button>
+
+          <button type="button" class="key" data-digit="4">4</button>
+          <button type="button" class="key" data-digit="5">5</button>
+          <button type="button" class="key" data-digit="6">6</button>
+          <button type="button" class="key key-op" data-operator="-" title="Subtract (-)" aria-label="Subtract">&minus;</button>
+
+          <button type="button" class="key" data-digit="1">1</button>
+          <button type="button" class="key" data-digit="2">2</button>
+          <button type="button" class="key" data-digit="3">3</button>
+          <button type="button" class="key key-op" data-operator="+" title="Add (+)" aria-label="Add">+</button>
+
+          <button type="button" class="key" data-action="negate" title="Change sign (F9)" aria-label="Change sign">&plusmn;</button>
+          <button type="button" class="key" data-digit="0">0</button>
+          <button type="button" class="key" data-action="decimal" title="Decimal point (.)" aria-label="Decimal point">.</button>
+          <button type="button" class="key key-equals" data-action="equals" title="Equals (Enter)" aria-label="Equals">=</button>
+        </div>
+      </section>
+
+      <section class="history" aria-label="History">
+        <div class="history-header">
+          <h2>History</h2>
+          <button type="button" id="clear-history" class="link-button">Clear</button>
+        </div>
+        <ol id="history-list" class="history-list"></ol>
+        <p id="history-empty" class="history-empty">Your calculations will appear here. Click one to reuse its result.</p>
+      </section>
+
+      <p class="hint">Tip: use your keyboard. Digits, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd>, <kbd>Enter</kbd>, <kbd>Backspace</kbd>, <kbd>Esc</kbd>, <kbd>%</kbd>.</p>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
